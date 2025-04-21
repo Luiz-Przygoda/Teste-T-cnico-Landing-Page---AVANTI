@@ -38,3 +38,6 @@ git clone
 cd avanti-landingpage
 ``` 
 Abra o *index.html* no navegador. Sem necessidade de servidores ou dependências!
+
+
+Feito com 💙 por Luiz Gustavo!
