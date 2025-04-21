@@ -3,7 +3,7 @@
 Uma landing page moderna e responsiva criada com **HTML**, **TailwindCSS** e **JavaScript**, inspirada no layout proposto pelo Figma para o desafio Innovation Class.
 
 <p align="center">
-  <a href="https://luiz-przygoda.github.io/avanti-landingpage" target="_blank">
+  <a href="https://luiz-przygoda.github.io/Teste_Tecnico_Landing_Page_AVANTI/" target="_blank">
     <img src="https://img.shields.io/badge/Live%20Preview-Online-blue?style=for-the-badge&logo=github" alt="Live Preview"/>
   </a>
 </p>
@@ -34,6 +34,7 @@ Uma landing page moderna e responsiva criada com **HTML**, **TailwindCSS** e **J
 Você pode visualizar diretamente via GitHub Pages ou clonar o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/avanti-landingpage.git
+git clone 
 cd avanti-landingpage
-
+``` 
+Abra o *index.html* no navegador. Sem necessidade de servidores ou dependências!
