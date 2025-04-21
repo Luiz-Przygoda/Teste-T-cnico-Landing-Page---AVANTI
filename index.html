@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avanti - Loja Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="assets/icons/favicon-avanti.png"
+      type="image/x-icon"
+    />
+
+  </head>
+  <body class="min-h-screen font-nunito overflow-x-hidden">
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-white shadow-md flex flex-col justify-center items-center"
+    >
+      <!-- Barra de aviso promocional no topo -->
+<div class="w-full overflow-hidden bg-blue-500 text-white py-3 px-4 max-sm:py-1 max-sm:px-3 flex justify-center items-center">
+  <div class="whitespace-nowrap animate-scroll-left">
+    <span class="text-sm font-bold max-md:text-[12px]">
+      Ganhe
+      <span class="bg-purple-700 font-bold px-1 rounded-md">R$10.00</span>
+      de desconto no seu primeiro pedido. Utilize o cupom
+      <span class="font-light">DESCONTO10</span>
+    </span>
+  </div>
+</div>
+
+      <!-- Conteúdo principal do header para telas médias e maiores -->
+      <div
+        class="container flex justify-between mx-auto px-4 py-4 hidden md:flex items-center"
+      >
+        <div class="flex w-full">
+          <!-- Logo -->
+          <a href="/" class="mr-4 self-center">
+            <img
+              src="assets/logos/logo.png"
+              class="w-[150px] h-auto"
+              alt="AVANTI"
+            />
+          </a>
+
+          <!-- Barra de pesquisa desktop -->
+          <div class="relative w-full max-w-[700px] mx-12 hidden md:block">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Digite aqui o que você procura"
+              class="w-full border border-gray-300 rounded-lg py-2 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              id="search-button"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 hover:text-blue-600"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+            <!-- Resultado da busca -->
+            <div
+              id="search-result"
+              class="absolute left-0 top-full w-full bg-white text-sm text-gray-700 shadow-lg rounded-lg p-2 hidden z-[60] flex justify-between items-center"
+            >
+              <p id="search-result-text" class="text-gray-700"></p>
+              <button id="clear-button" class="hover:text-red-600">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <!-- Informações do usuário -->
+          <div class="flex items-center mr-6">
+            <img
+              src="assets/icons/icon-user.png"
+              class="mr-2 w-5 h-6"
+              alt="Usuário"
+            />
+            <div>
+              <p class="text-sm leading-tight font-semibold">
+                Olá, <span class="whitespace-nowrap">Nome cliente!</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Ícone do carrinho com contador -->
+          <div class="relative">
+            <img
+              src="assets/icons/icon-cart.png"
+              class="object-contain w-[40px] h-[24px] md:block hidden max-lg:w-[60px]"
+              alt="Carrinho"
+            />
+            <span
+              class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            >
+              3
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header mobile -->
+      <div class="w-full md:hidden">
+        <div class="flex items-center justify-between px-4 py-3">
+          <button id="menu-toggle" class="h-16">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+
+          <a href="/" class="inline-block">
+            <img
+              src="assets/logos/logo.png"
+              class="h-10 max-md:w-[150px] max-lg:w-[150px] object-contain"
+              alt="Avanti - Voltar para página inicial"
+            />
+          </a>
+
+          <!-- Ícone do carrinho no mobile -->
+          <div class="relative">
+            <img
+              src="assets/icons/icon-cart.png"
+              class="object-contain w-[30px] h-[24px]"
+              alt="Carrinho"
+            />
+            <span
+              class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            >
+              3
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de busca para dispositivos móveis -->
+      <div class="px-4 pb-3 hidden w-full max-md:block">
+        <div class="relative w-full">
+          <input
+            id="mobile-search-input"
+            type="text"
+            placeholder="Digite aqui o que você procura"
+            class="w-full border border-gray-300 rounded-lg py-2 px-4 pr-10"
+          />
+          <button
+            id="mobile-search-button"
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-blue-600"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+          <!-- Resultado da busca no mobile -->
+          <div
+            id="mobile-search-result"
+            class="absolute left-0 top-full w-full bg-white text-sm text-gray-700 shadow-lg rounded-lg p-2 hidden z-[60] flex justify-between items-center"
+          >
+            <p id="mobile-search-result-text" class="text-gray-700"></p>
+            <button id="mobile-clear-button" class="hover:text-red-600">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav class="w-full bg-white shadow-md relative z-50 hidden md:block">
+        <!-- Container principal do menu -->
+        <div
+          class="container w-full mx-auto px-4 py-4 flex flex-col w-full relative"
+        >
+          <!-- Lista de itens do menu principal -->
+          <ul
+            class="flex text-[14px] justify-between whitespace-nowrap w-full max-lg:text-[11px]"
+          >
+            <li class="relative group">
+              <div
+                class="cursor-pointer flex items-center hover:text-blue-600 hover:font-bold"
+              >
+                <i class="fas fa-bars mr-2 max-lg:mb-1" aria-hidden="true"></i>
+                <span>Todas as Categorias</span>
+              </div>
+              <!-- Dropdown content -->
+              <div
+                class="absolute top-full left-1 hidden group-hover:flex z-50 w-screen pt-[16px] -mt-[16px] pointer-events-none"
+              >
+                <div
+                  class="bg-white w-[78%] flex relative shadow-lg pointer-events-auto"
+                >
+                  <!-- Conteúdo principal -->
+                  <div class="px-5 py-5 flex">
+                    <div class="flex gap-10 items-start w-full">
+                      <div class="w-64 p-4 bg-[#F5F5F5] max-lg:w-40">
+                        <ul class="overflow-y-auto">
+                          <!-- Itens de departamento -->
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                          <li
+                            class="py-1 hover:text-blue-600 cursor-pointer flex justify-between items-center"
+                          >
+                            <span>Departamento</span
+                            ><i class="fa-solid fa-chevron-right fa-xs"></i>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Colunas de categorias -->
+                      <div
+                        class="flex w-full gap-15 max-lg:gap-0 justify-between"
+                      >
+                        <!-- Coluna 1 -->
+                        <div class="p-4 max-lg:p-0 max-lg:pt-4">
+                          <h3 class="font-semibold text-blue-600 mb-2">
+                            Categoria
+                          </h3>
+                          <ul class="flex flex-col gap-2">
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Coluna 2 -->
+                        <div class="p-4 max-lg:p-0 max-lg:pt-4">
+                          <h3 class="font-semibold text-blue-600 mb-2">
+                            Categoria
+                          </h3>
+                          <ul class="flex flex-col gap-2">
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Coluna 3 -->
+                        <div class="p-4 max-lg:p-0 max-lg:pt-4">
+                          <h3 class="font-semibold text-blue-600 mb-2">
+                            Categoria
+                          </h3>
+                          <ul class="flex flex-col gap-2">
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                            <li class="py-1 hover:text-blue-600 cursor-pointer">
+                              Categoria
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Banner foto -->
+                  <div class="flex justify-end items-center p-5 pl-0 w-full">
+                    <div class="relative rounded-md overflow-hidden shadow-md">
+                      <img
+                        src="assets/banners/banner-secondary.png"
+                        alt="Banner"
+                        class="object-cover w-[326px] h-[350px]"
+                      />
+                      <div
+                        class="absolute inset-0 bg-black bg-opacity-40 text-white p-4 flex flex-col justify-center"
+                      >
+                        <p
+                          class="leading-[30px] relative left-5 tracking-1 text-[24px] max-w-[127px] flex-wrap whitespace-normal max-lg:leading-[20px] max-lg:text-[18px] max-lg:left-4"
+                        >
+                          Confira os Produtos
+                          <span class="font-bold">Que acabaram de chegar</span>
+                        </p>
+                        <button
+                          class="mt-4 relative left-5 font-bold bg-transparent border border-1 rounded-[8px] text-[12px] w-[116px] h-[38px] hover:bg-blue-600 hover:border-0 transition-colors max-lg:text-[12px] max-lg:left-4"
+                        >
+                          VER TODOS
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Item 2: Departamento (com dropdown) -->
+            <li class="relative group">
+              <a class="cursor-pointer px-2 hover:text-blue-600 hover:font-bold"
+                >Departamento</a
+              >
+              <!-- Dropdown content -->
+              <div
+                class="absolute top-full left-1 hidden group-hover:flex z-50 w-screen pt-[16px] -mt-[16px] pointer-events-none"
+              >
+                <div
+                  class="relative right-[13%] bg-white w-[78%] flex shadow-lg pointer-events-auto"
+                >
+                  <!-- Conteúdo principal -->
+                  <div class="px-5 py-5 flex flex-col">
+                    <h1 class="font-bold pl-4">Departamento</h1>
+                    <div class="flex gap-10 w-full">
+                      <!-- Coluna 1 -->
+                      <div class="p-4">
+                        <h3 class="font-semibold text-blue-600 mb-2">
+                          Categoria
+                        </h3>
+                        <ul class="flex flex-col gap-2">
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Coluna 2 -->
+                      <div class="p-4">
+                        <h3 class="font-semibold text-blue-600 mb-2">
+                          Categoria
+                        </h3>
+                        <ul class="flex flex-col gap-2">
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Coluna 3 -->
+                      <div class="p-4">
+                        <h3 class="font-semibold text-blue-600 mb-2">
+                          Categoria
+                        </h3>
+                        <ul class="flex flex-col gap-2">
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                          <li class="py-1 hover:text-blue-600 cursor-pointer">
+                            Categoria
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Banner foto (direita) -->
+                  <div class="flex justify-end items-center p-5 pl-0 w-full">
+                    <div class="relative rounded-md overflow-hidden shadow-md">
+                      <img
+                        src="assets/banners/banner-secondary.png"
+                        alt="Banner"
+                        class="object-cover w-[326px] h-[350px]"
+                      />
+                      <div
+                        class="absolute inset-0 bg-black bg-opacity-40 text-white p-4 flex flex-col justify-center"
+                      >
+                        <p
+                          class="leading-[30px] relative left-5 tracking-1 text-[24px] max-w-[127px] flex-wrap whitespace-normal max-lg:leading-[20px] max-lg:text-[18px] max-lg:left-4"
+                        >
+                          Confira os Produtos
+                          <span class="font-bold">Que acabaram de chegar</span>
+                        </p>
+                        <button
+                          class="mt-4 relative left-5 font-bold bg-transparent border border-1 rounded-[8px] text-[12px] w-[116px] h-[38px] hover:bg-blue-600 hover:border-0 transition-colors max-lg:text-[12px] max-lg:left-4"
+                        >
+                          VER TODOS
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Itens simples do menu (sem dropdown) -->
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+            <li>
+              <a class="hover:text-blue-600 hover:font-bold cursor-pointer px-2"
+                >Departamento</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Menu mobile -->
+      <div
+        id="mobile-menu"
+        class="hidden fixed inset-0 bg-white z-50 pt-16 md:hidden overflow-y-auto mobile-menu"
+      >
+        <!-- Container principal do menu mobile -->
+        <div class="p-4">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="font-bold text-lg">Categorias</h2>
+            <!-- Botão para fechar o menu -->
+            <button id="close-menu" class="text-gray-700 hover:text-red-600">
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+
+          <!-- Lista de departamentos (itens do menu) -->
+          <ul class="space-y-4">
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 1</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 2</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 3</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 4</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 5</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 6</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 7</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 8</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+
+            <li class="py-2 border-b">
+              <a href="#" class="flex justify-between items-center">
+                <span>Departamento 9</span>
+                <i class="fa-solid fa-chevron-right fa-xs"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Seção de banner promocional (Super Sale) -->
+    <section
+      class="bg-[#e7e7ea] w-full overflow-hidden flex mt-[130px] max-lg:mt-[165px] max-md:mt-[185px] max-sm:mt-[170px]"
+    >
+      <div class="container w-full mx-auto flex items-center">
+        <div
+          class="w-1/2 max-sm:relative max-sm:mt-20 max-sm:h-full max-sm:right-6"
+        >
+          <img
+            src="assets/banners/banner-super-sale.png"
+            alt="Roupas dobradas em uma cadeira"
+            class="min-w-[250px] object-fit relative h-full max-sm:bottom-10 max-sm:right-16"
+          />
+        </div>
+
+        <!-- Container do texto -->
+        <div
+          class="p-2 flex h-full flex-col right-10 relative justify-center max-lg:gap-0 max-sm:right-1"
+        >
+          <!-- Título principal -->
+          <h2
+            class="text-[80px] font-bold max-lg:text-center max-lg:text-[40px] max-sm:text-[32px] max-sm:leading-[36px] max-sm:tracking-normal max-sm:text-center"
+          >
+            <span class="text-black block sm:inline">SUPER</span
+            ><span class="font-light block sm:inline">SALE</span>
+          </h2>
+
+          <p
+            class="text-blue-600 text-[22px] w-full tracking-[4px] font-medium max-lg:text-center max-lg:text-[14px] max-sm:tracking-normal max-sm:text-[10px] max-sm:leading-[20px] max-sm:text-center"
+          >
+            ITENS SELECIONADOS COM ATÉ
+          </p>
+
+          <p
+            class="text-blue-600 lg:mt-5 relative left-32 text-left text-xl sm:text-3xl md:text-4xl lg:text-[50px] max-lg:left-[85px] max-md:text-[32px] max-md:left-[95px] font-bold max-sm:text-[28px] max-sm:left-0 max-sm:text-center"
+          >
+            50%OFF
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de lançamentos com carrossel -->
+    <section class="container mx-auto py-6 md:py-12 px-4 mb-5">
+      <div class="flex justify-between items-center mb-4 md:mb-6">
+        <h2 class="text-xl md:text-2xl font-bold">Lançamentos</h2>
+        <a
+          href="#"
+          class="text-sm md:text-md text-gray-600 hover:text-blue-600 hover:underline transition-colors"
+        >
+          Ver mais
+        </a>
+      </div>
+
+      <!-- Container do carrossel -->
+      <div class="relative">
+        <!-- Carrossel Swiper -->
+        <div class="swiper product-swiper">
+          <div class="swiper-wrapper" id="swiper-slides-container"></div>
+        </div>
+
+        <div
+          class="custom-swiper-button-prev absolute left-0 md:left-[-15px] top-1/2 transform -translate-y-1/2 z-10 bg-white w-[30px] h-[30px] flex items-center justify-center rounded-full shadow-md border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 cursor-pointer max-md:hidden"
+        >
+          <i class="fa-solid fa-arrow-left text-xs md:text-sm"></i>
+        </div>
+        <div
+          class="custom-swiper-button-next absolute right-0 md:right-[-15px] top-1/2 transform -translate-y-1/2 z-10 bg-white w-[30px] h-[30px] flex items-center justify-center rounded-full shadow-md border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 cursor-pointer max-md:hidden"
+        >
+          <i class="fa-solid fa-arrow-right text-xs md:text-sm"></i>
+        </div>
+      </div>
+      <div
+        class="custom-swiper-pagination mt-3 md:mt-4 flex justify-center"
+      ></div>
+    </section>
+
+    <!-- Seção caneca + texto -->
+    <section
+      class="flex justify-center max-lg:flex-col w-full max-md:p-0 max-sm:gap-0 max-lg-gap-0 mb-10"
+    >
+      <div class="bg-[#c2c2c2] flex flex-col items-center justfiy-center">
+        <img
+          src="assets/banners/banner-mug.png"
+          class="p-10"
+          alt="Caneca avanti"
+        />
+      </div>
+      <div
+        class="max-w-full flex p-10 flex-col text-[18px] w-[40%] leading-[140%] tracking-7 gap-6 justify-center max-lg:w-full max-md:w-[100%] max-sm:text-[12px] max-sm:p-5"
+      >
+        <h1 class="font-bold text-[30px] uppercase max-sm:text-[22px]">
+          Lorem Ipsum
+        </h1>
+        <p>
+          Duis consectetur metus nec lacus auctor dignissim. Mauris vitae
+          finibus dui. Mauris laoreet lacus ut eleifend viverra. Cras efficitur
+          volutpat dui, in lobortis metus lacinia sit amet. Sed lacinia pharetra
+          magna, vel pulvinar ligula hendrerit a. Maecenas fringilla porttitor
+          tortor eget lacinia. Donec sollicitudin euismod orci, auctor fringilla
+          magna consequat interdum. Fusce sagittis elit a libero commodo egestas
+          efficitur id augue.
+        </p>
+        <p>
+          Duis consectetur metus nec lacus auctor dignissim. Mauris vitae
+          finibus dui. Mauris laoreet lacus ut eleifend viverra. Cras efficitur
+          volutpat dui, in lobortis metus lacinia sit amet. Sed lacinia pharetra
+          magna, vel pulvinar ligula hendrerit a. Maecenas fringilla porttitor
+          tortor eget lacinia. Donec sollicitudin euismod orci, auctor fringilla
+          magna consequat interdum. Fusce sagittis elit a libero commodo egestas
+          efficitur id augue.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção de imagem + tópicos -->
+    <section
+      class="w-full bg-[#dedede] mb-10 flex lg:flex-row max-lg:flex-col-reverse justify-center items-center p-10 gap-10 max-sm:p-5 max-sm:gap-5"
+    >
+      <div
+        class="text-left text-[#4F4F4F] flex flex-col items-start lg:items-start lg:mr-20"
+      >
+        <h1
+          class="uppercase text-[30px] text-black font-semibold w-full text-center mb-6 max-md:text-[24px] max-sm:text-[20px]"
+        >
+          Lorem ipsum
+        </h1>
+        <!-- Container dos itens com ícones -->
+        <div
+          class="flex flex-col text-[18px] gap-9 max-md:text-[16px] max-sm:text-[14px]"
+        >
+          <div
+            class="flex justify-start items-center max-md:gap-4 text-left max-sm:text-[12px]"
+          >
+            <span
+              class="bg-blue-600 w-20 h-20 rounded-full mr-5 flex items-center justify-center max-md:mr-0 max-md:w-[80px] max-md:h-[70px] max-sm:h-[60px]"
+            >
+              <img
+                src="assets/icons/icon-map-pin.png"
+                alt="Pin"
+                class="w-10 h-10 max-md:w-8 max-md:h-8 max-sm:w-6 max-sm:h-6"
+              />
+            </span>
+            <p class="w-[360px] max-md:w-full">
+              Aenean massa. Cum sociis natoque penatibus et magnis dis
+              parturient montes, nascetur ridiculus mus. Donec quam felis,
+              ultricies nec, pellentesque eu, pretium quis, sem.
+            </p>
+          </div>
+          <div class="flex justify-start items-center max-md:gap-4 text-left">
+            <span
+              class="bg-blue-600 w-20 h-20 rounded-full mr-5 flex items-center justify-center max-md:mr-0 max-md:w-[80px] max-md:h-[70px] max-sm:h-[60px]"
+            >
+              <img
+                src="assets/icons/icon-map-pin.png"
+                alt="Pin"
+                class="w-10 h-10 max-md:w-8 max-md:h-8 max-sm:w-6 max-sm:h-6"
+              />
+            </span>
+            <p class="w-[360px] max-md:w-full">
+              Aenean massa. Cum sociis natoque penatibus et magnis dis
+              parturient montes, nascetur ridiculus mus. Donec quam felis,
+              ultricies nec, pellentesque eu, pretium quis, sem.
+            </p>
+          </div>
+          <div class="flex justify-start items-center max-md:gap-4 text-left">
+            <span
+              class="bg-blue-600 w-20 h-20 rounded-full mr-5 flex items-center justify-center max-md:mr-0 max-md:w-[80px] max-md:h-[70px] max-sm:h-[60px]"
+            >
+              <img
+                src="assets/icons/icon-map-pin.png"
+                alt="Pin"
+                class="w-10 h-10 max-md:w-8 max-md:h-8 max-sm:w-6 max-sm:h-6"
+              />
+            </span>
+            <p class="w-[360px] max-md:w-full">
+              Aenean massa. Cum sociis natoque penatibus et magnis dis
+              parturient montes, nascetur ridiculus mus. Donec quam felis,
+              ultricies nec, pellentesque eu, pretium quis, sem.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-[50%] flex justify-center">
+        <img
+          src="assets/banners/banner-secondary.png"
+          class="object-cover w-[650px] h-auto"
+          alt="Caneca em uma mesa"
+        />
+      </div>
+    </section>
+
+    <!-- Seção caneca + texto 2 -->
+    <section
+      class="flex justify-center max-lg:flex-col w-full max-md:p-0 max-sm:gap-0 max-lg-gap-0 mb-10"
+    >
+      <div class="bg-[#c2c2c2] flex flex-col items-center justfiy-center">
+        <img
+          src="assets/banners/banner-mug.png"
+          class="p-10"
+          alt="Caneca avanti"
+        />
+      </div>
+      <div
+        class="max-w-full flex p-10 flex-col text-[18px] w-[40%] leading-[140%] tracking-7 gap-6 justify-center max-lg:w-full max-md:w-[100%] max-sm:text-[12px] max-sm:p-5"
+      >
+        <h1 class="font-bold text-[30px] uppercase max-sm:text-[22px]">
+          Lorem Ipsum
+        </h1>
+        <p>
+          Duis consectetur metus nec lacus auctor dignissim. Mauris vitae
+          finibus dui. Mauris laoreet lacus ut eleifend viverra. Cras efficitur
+          volutpat dui, in lobortis metus lacinia sit amet. Sed lacinia pharetra
+          magna, vel pulvinar ligula hendrerit a. Maecenas fringilla porttitor
+          tortor eget lacinia. Donec sollicitudin euismod orci, auctor fringilla
+          magna consequat interdum. Fusce sagittis elit a libero commodo egestas
+          efficitur id augue.
+        </p>
+        <p>
+          Duis consectetur metus nec lacus auctor dignissim. Mauris vitae
+          finibus dui. Mauris laoreet lacus ut eleifend viverra. Cras efficitur
+          volutpat dui, in lobortis metus lacinia sit amet. Sed lacinia pharetra
+          magna, vel pulvinar ligula hendrerit a. Maecenas fringilla porttitor
+          tortor eget lacinia. Donec sollicitudin euismod orci, auctor fringilla
+          magna consequat interdum. Fusce sagittis elit a libero commodo egestas
+          efficitur id augue.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção de lançamentos com carrossel -->
+    <section class="container mx-auto py-6 md:py-12 px-4 mb-5">
+      <div class="flex justify-between items-center mb-4 md:mb-6">
+        <h2 class="text-xl md:text-2xl font-bold">Lançamentos</h2>
+        <a
+          href="#"
+          class="text-sm md:text-md text-gray-600 hover:text-blue-600 hover:underline transition-colors"
+        >
+          Ver mais
+        </a>
+      </div>
+      <!-- Container principal do carrossel -->
+      <div class="relative">
+        <!-- Carrossel Swiper -->
+        <div class="swiper another-swiper">
+          <div
+            class="swiper-wrapper"
+            id="another-swiper-slides-container"
+          ></div>
+        </div>
+
+        <div
+          class="custom-swiper-button-prev-2 absolute left-0 md:left-[-15px] top-1/2 transform -translate-y-1/2 z-10 bg-white w-[30px] h-[30px] flex items-center justify-center rounded-full shadow-md border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 cursor-pointer max-md:hidden"
+        >
+          <i class="fa-solid fa-arrow-left text-xs md:text-sm"></i>
+        </div>
+        <div
+          class="custom-swiper-button-next-2 absolute right-0 md:right-[-15px] top-1/2 transform -translate-y-1/2 z-10 bg-white w-[30px] h-[30px] flex items-center justify-center rounded-full shadow-md border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300 cursor-pointer max-md:hidden"
+        >
+          <i class="fa-solid fa-arrow-right text-xs md:text-sm"></i>
+        </div>
+      </div>
+      <div
+        class="custom-swiper-pagination-2 mt-3 md:mt-4 flex justify-center"
+      ></div>
+    </section>
+
+    <!-- Banner de contato com sobreposição de texto -->
+    <section class="w-full relative mb-10 min-h-[300px]">
+      <img
+        src="assets/banners/banner-room-avanti.png"
+        alt="Quarto avanti"
+        class="w-full h-full object-fit min-h-[300px] object-cover"
+      />
+
+      <div class="absolute inset-0 flex items-center justify-center">
+        <!-- Faixa azul com texto de chamada -->
+        <div
+          class="h-auto w-full bg-blue-600 text-white text-[20px] flex items-center justify-center text-center px-4 py-6 max-sm:py-2 max-sm:px-2"
+        >
+          <span
+            class="max-lg:text[10px] max-md:text-[18px] max-sm:text-[12px] max-sx:text-[10px]"
+          >
+            Entre em contato conosco e verifique a disponibilidade para sua
+            região!
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de cadastro -->
+    <section class="w-full flex flex-col justify-center items-center">
+      <!-- Título da seção -->
+      <h1 class="text-[20px] font-bold mb-4 max-sm:text-[16px]">
+        Cadastre-se na nossa
+        <span class="text-blue-600 font-bold">newsletter</span>
+      </h1>
+
+      <!-- Container do formulário -->
+      <div
+        class="max-w-[1260px] mx-20 bg-[#dedede] mb-10 py-14 px-32 rounded-md flex justify-center items-center max-md:px-10 max-md:mx-10 max-md:py-10 max-sm:px-5 max-sm:mx-5"
+      >
+        <!-- Formulário de cadastro -->
+        <form
+          class="w-full flex flex-wrap gap-4 items-center justify-center max-sm:flex-col"
+        >
+          <input
+            type="text"
+            placeholder="Digite seu nome"
+            class="flex-1 px-4 py-3 rounded-md border-0 max-sm:w-full max-sm:text-[12px] max-sm:px-2 max-sm:py-3"
+          />
+          <input
+            type="email"
+            placeholder="Digite seu e-mail"
+            class="flex-1 px-4 py-3 rounded-md border-0 max-sm:w-full max-sm:text-[12px] max-sm:px-2 max-sm:py-3"
+          />
+
+          <div class="flex items-center gap-2 max-sm:w-full">
+            <input type="checkbox" id="privacy-policy" class="h-4 w-4" />
+            <label
+              for="privacy-policy"
+              class="text-sm max-sm:text-[12px] max-md:whitespace-normal"
+            >
+              Estou de acordo com a
+              <a href="#" class="underline">Política de Privacidade</a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors max-sm:w-full max-sm:text-[12px] max-sm:px-2 max-sm:py-3"
+          >
+            Cadastrar
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      <!-- Seção principal do rodapé -->
+      <section
+        class="w-full gap-10 flex flex-col justify-center items-center bg-[#F5F5F5] py-10 md:h-[386px]"
+      >
+        <div
+          class="flex flex-col items-start gap-28 md:flex-row max-md:gap-10 max-lg:gap-0 max-md:items-center"
+        >
+          <!-- Logo e redes sociais -->
+          <div class="flex flex-col pr-10 max-md:items-center max-md:pr-0">
+            <img src="assets/logos/logo.png" class="w-[152px]" alt="Avanti" />
+            <div class="flex gap-12 mt-10 max-md:gap-10 max-lg:gap-5">
+              <i class="fa-brands fa-instagram fa-lg text-[#005CFF]"></i>
+              <i class="fa-brands fa-facebook-f fa-lg text-[#005CFF]"></i>
+              <i class="fa-brands fa-youtube fa-lg text-[#005CFF]"></i>
+              <i class="fa-brands fa-tiktok fa-lg text-[#005CFF]"></i>
+            </div>
+          </div>
+
+          <!-- Links do rodapé -->
+          <div
+            class="flex flex-col md:flex-row justify-center gap-28 text-[12px] max-lg:gap-10 max-md:mt-5 max-md:gap-0 max-md:w-screen"
+          >
+            <!-- Institucional -->
+            <div class="max-md:border max-md:border-1">
+              <div class="md:hidden">
+                <button
+                  class="flex justify-between items-center font-bold w-full max-md:p-4"
+                  onclick="document.getElementById('institucional').classList.toggle('hidden')"
+                >
+                  Institucional
+                  <i
+                    class="fa-solid fa-chevron-down text-[12px] text-blue-600"
+                  ></i>
+                </button>
+              </div>
+              <p class="font-bold md:mb-2 hidden md:block">Institucional</p>
+              <div
+                id="institucional"
+                class="flex flex-col gap-1 mt-1 md:mt-0 md:block hidden max-md:pl-5 max-md:pb-5"
+              >
+                <div class="flex flex-col gap-2">
+                  <p class="cursor-pointer hover:underline">Sobre Nós</p>
+                  <p class="cursor-pointer hover:underline">Nossas Lojas</p>
+                  <p class="cursor-pointer hover:underline">
+                    Privacidade e Segurança
+                  </p>
+                  <p class="cursor-pointer hover:underline">
+                    Termos e Condições
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Central de Ajuda -->
+            <div class="">
+              <div class="md:hidden">
+                <button
+                  class="flex justify-between items-center font-bold w-full max-md:p-4"
+                  onclick="document.getElementById('ajuda').classList.toggle('hidden')"
+                >
+                  Central de Ajuda
+                  <i
+                    class="fa-solid fa-chevron-down text-[12px] text-blue-600"
+                  ></i>
+                </button>
+              </div>
+              <p class="font-bold md:mb-2 hidden md:block">Central de Ajuda</p>
+              <div
+                id="ajuda"
+                class="flex flex-col md:mt-0 md:block hidden max-md:pl-5 max-md:pb-5"
+              >
+                <div class="flex flex-col gap-2">
+                  <p class="cursor-pointer hover:underline">Fale Conosco</p>
+                  <p class="cursor-pointer hover:underline">Frete e Entrega</p>
+                  <p class="cursor-pointer hover:underline">
+                    Trocas e Devoluções
+                  </p>
+                  <p class="cursor-pointer hover:underline">
+                    Formas de Pagamento
+                  </p>
+                  <p class="cursor-pointer hover:underline">FAQ</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Atendimento -->
+            <div class="max-md:border max-md:border-1">
+              <div class="md:hidden">
+                <button
+                  class="flex justify-between items-center font-bold w-full max-md:p-4"
+                  onclick="document.getElementById('atendimento').classList.toggle('hidden')"
+                >
+                  Atendimento
+                  <i
+                    class="fa-solid fa-chevron-down text-[12px] text-blue-600"
+                  ></i>
+                </button>
+              </div>
+              <p class="font-bold hidden md:mb-2 md:block">Atendimento</p>
+              <div
+                id="atendimento"
+                class="flex flex-col mt-1 md:mt-0 md:block hidden max-md:pl-5 max-md:pb-5"
+              >
+                <div class="flex flex-col gap-2">
+                  <p><span class="font-bold">Telefone:</span> (00) 1234-5678</p>
+                  <p>
+                    <span class="font-bold">E-mail:</span>
+                    exemplo@exemplo.com.br
+                  </p>
+                  <p class="font-bold">Horário de atendimento:</p>
+                  <p>Segunda a Sábado: 07h00 às 23h00</p>
+                  <p>Domingos e Feriados: 07h00 às 21h00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meios de pagamento -->
+        <div class="flex flex-wrap justify-center gap-8 max-md:gap-6 mt-0 px-4">
+          <img
+            src="assets/payments/amex.png"
+            class="object-contain"
+            alt="Amex"
+          />
+          <img
+            src="assets/payments/mastercard.png"
+            class="object-contain"
+            alt="Mastercard"
+          />
+          <img
+            src="assets/payments/visa.png"
+            class="object-contain"
+            alt="Visa"
+          />
+          <img
+            src="assets/payments/hipercard.png"
+            class="object-contain"
+            alt="Hipercard"
+          />
+          <img
+            src="assets/payments/celo.png"
+            class="object-contain"
+            alt="Elo"
+          />
+          <img
+            src="assets/payments/superforma.png"
+            class="object-contain"
+            alt="SuperForma"
+          />
+          <img
+            src="assets/payments/paypal.png"
+            class="object-contain"
+            alt="PayPal"
+          />
+          <img src="assets/payments/pix.png" class="object-contain" alt="Pix" />
+          <img
+            src="assets/payments/boleto.png"
+            class="object-contain"
+            alt="Boleto"
+          />
+        </div>
+      </section>
+
+      <!-- Seção de direitos autorais e certificações -->
+      <section
+        class="w-full h-[221px] flex flex-col justify-center items-center"
+      >
+        <p
+          class="text-[12px] w-[75%] leading-[20px] text-center max-sm:text-[8px] max-sm:w-[90%] max-sm:leading-[10px]"
+        >
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+          volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+          Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+          molestie consequat, vel illum dolore eu feugiat nulla facilisis at
+          vero eros et accumsan et iusto odio dignissim qui blandit praesent
+          luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+        </p>
+        <!-- Logos de certificações -->
+        <div class="flex gap-4 justify-center items-center mt-6">
+          <img src="./assets/logos/certification-group.png" alt="LetsEncriypt" />
+          <img src="./assets/logos/vtex-pci.png" alt="Vtex e PCI" />
+          <span class="w-[1px] h-[15px] bg-[#f5f5f5]"></span>
+          <img
+            src="./assets/logos/logo.png"
+            class="w-[57px] h-[10px]"
+            alt="Avanti"
+          />
+          <img src="./assets/logos/vtex-logo.png" alt="Vtext" />
+        </div>
+      </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>
